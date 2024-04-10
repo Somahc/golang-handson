@@ -27,9 +27,18 @@ func main() {
 		}
 	})
 	c.SetChecked(true)
+	v := 0.
+	p := widget.NewProgressBar()
+	b := widget.NewButton("Up!", func() {
+		v += 0.1
+		if v > 1.0 {
+			v = 0.
+		}
+		p.SetValue(v)
+	})
 	text1 := canvas.NewText("Hello Fyne!", color.White)
 	text2 := canvas.NewText("This is a sample application!", color.White)
-	content := container.NewVBox(text1, text2, l, e, c,
+	content := container.NewVBox(text1, text2, l, e, c, p, b,
 		widget.NewButton("Click me!", func() {
 			n, _ := strconv.Atoi(e.Text)
 			l.SetText("Total: " + strconv.Itoa(total(n)))
