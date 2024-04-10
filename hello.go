@@ -19,9 +19,17 @@ func main() {
 	l := widget.NewLabel("Hello Fyne!")
 	e := widget.NewEntry()
 	e.SetText("0")
+	c := widget.NewCheck("Check!", func(f bool) {
+		if f {
+			l.SetText("CHECKED!")
+		} else {
+			l.SetText("UNCHECKED!")
+		}
+	})
+	c.SetChecked(true)
 	text1 := canvas.NewText("Hello Fyne!", color.White)
 	text2 := canvas.NewText("This is a sample application!", color.White)
-	content := container.NewVBox(text1, text2, l, e,
+	content := container.NewVBox(text1, text2, l, e, c,
 		widget.NewButton("Click me!", func() {
 			n, _ := strconv.Atoi(e.Text)
 			l.SetText("Total: " + strconv.Itoa(total(n)))
